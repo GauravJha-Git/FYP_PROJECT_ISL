@@ -1,0 +1,19 @@
+# Environments
+isl_env/
+__pycache__/
+*.pyc
+
+# Data (Too large for Git)
+MP_Data/
+ISL_Raw_Data/
+
+# Models (Keep action.h5 as it's the core artifact)
+# action.h5
+
+# IDE
+.vscode/
+.idea/
+
+# System
+thumbs.db
+Desktop.ini

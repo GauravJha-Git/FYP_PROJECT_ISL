@@ -14,9 +14,22 @@ SEQUENCE_LENGTH = 30
 # From 1 video, create 30 slightly different versions
 AUGMENTATIONS = 30 
 
-# Setup MediaPipe
-mp_holistic = mp.solutions.holistic
-mp_drawing = mp.solutions.drawing_utils
+# Setup MediaPipe (Robust Import)
+try:
+    if hasattr(mp, 'solutions'):
+        mp_holistic = mp.solutions.holistic
+        mp_drawing = mp.solutions.drawing_utils
+    else:
+        import mediapipe.python.solutions as solutions
+        mp_holistic = solutions.holistic
+        mp_drawing = solutions.drawing_utils
+    print("MediaPipe loaded successfully.")
+except ImportError as e:
+    print(f"CRITICAL ERROR: {e}")
+    exit()
+except AttributeError as e:
+    print(f"CRITICAL ERROR: {e}")
+    exit()
 
 def extract_keypoints(results):
     # Extract Pose (33 points * 4 values: x,y,z,visibility)
